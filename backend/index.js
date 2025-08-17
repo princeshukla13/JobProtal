@@ -16,8 +16,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// ✅ Updated CORS config
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",                // local frontend
+    "https://job-protal-gw9d.vercel.app"    // deployed frontend
+  ],
   credentials: true,
 };
 
@@ -30,6 +35,11 @@ app.use("/api/v1/user", userRoute);
 app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
+
+// ✅ Health check route
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+});
 
 app.listen(PORT, () => {
   connectDB();
