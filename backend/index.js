@@ -20,15 +20,15 @@ app.use(cookieParser());
 // ✅ Updated CORS config
 const corsOptions = {
   origin: [
-    "http://localhost:5173",                // local frontend
-    "https://job-protal-gw9d.vercel.app"    // deployed frontend
+    "http://localhost:5173", // local frontend
+    "https://job-protal-gw9d.vercel.app", // deployed frontend
   ],
   credentials: true,
 };
 
 app.use(cors(corsOptions));
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
 
 // api's
 app.use("/api/v1/user", userRoute);
